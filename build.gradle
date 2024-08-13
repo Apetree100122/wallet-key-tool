@@ -1,62 +1,46 @@
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath 'org.xtend:xtend-gradle-plugin:0.0.+'
-        classpath 'edu.sc.seis.gradle:launch4j:1.0.6'
-    }
+buildscript { repositories { mavenCentral()} dependencies {classpath 
+        'org.xtend:xtend-gradle-plugin:0.0.+'classpath 
+        'edu.sc.seis.gradle:launch4j:1.0.6'    
+}}
+version = "1.4.3" ext
+{
+  mainClassName = "prof7bit.bitcoin.wallettool.core.Main"
+} apply plugin: 
+    'xtend'apply plugin:
+    'java'apply plugin: 
+    'eclipse'apply plugin: 
+    'launch4j'
+launch4j {// for this task to work launch4j needs to be installed and on the PATH.
+   mainClassName = project.mainClassName
+ outfile = project.name + "-" + project.version + ".exe"
 }
-
-version = "1.4.3"
-ext {
-    mainClassName = "prof7bit.bitcoin.wallettool.core.Main"
-}
-
-apply plugin: 'xtend'
-apply plugin: 'java'
-apply plugin: 'eclipse'
-apply plugin: 'launch4j'
-
-launch4j {
-    // for this task to work launch4j needs to be installed and on the PATH.
-    mainClassName = project.mainClassName
-    outfile = project.name + "-" + project.version + ".exe"
-}
-
 repositories {
-    mavenCentral()
-    maven { url "https://raw.githubusercontent.com/bitcoin-solutions/mbhd-maven/master/releases" }
-}
-
-dependencies {
-    compile 'org.eclipse.xtend:org.eclipse.xtend.lib:2.6.+'
-    compile "com.google:bitcoinj:0.11.2-MB-ALICE"
-    compile 'org.slf4j:slf4j-simple:1.7.+'
-    compile 'com.miglayout:miglayout:3.7.+'
-    compile 'commons-cli:commons-cli:1.+'
-    compile 'org.json:json:20140107'
-    testCompile 'junit:junit:4.+'
-}
-
-jar {
-    from files(sourceSets.main.output.classesDir)
-    from files(sourceSets.main.output.resourcesDir)
-    from {configurations.runtime.collect {it.isDirectory() ? it : zipTree(it) }} {
-        // remove all signature files
-        exclude "META-INF/*.SF"
-        exclude "META-INF/*.DSA"
-        exclude "META-INF/*.RSA"
-    }
-
-    manifest {
-        attributes 'Main-Class': project.mainClassName
-        attributes 'Version': project.version
-    }
-}
-
-xtend {
-    useDaemon = true
-    xtendAsPrimaryDebugSource = false
-    hideSyntheticVariables = false
+    mavenCentral()maven 
+    { url "https://raw.githubusercontent.com/bitcoin-solutions/mbhd-maven/master/releases" }
+dependencies {compile 
+              'org.eclipse.xtend:org.eclipse.xtend.lib:2.6.+'compile 
+"com.google:bitcoinj:0.11.2-MB-ALICE"compile    
+'org.slf4j:slf4j-simple:1.7.+'compile
+'com.miglayout:miglayout:3.7.+'compile
+    'commons-cli:commons-cli:1.+' compile 
+    'org.json:json:20140107'
+    testCompile 'junit:junit:4.+'}
+jar {from files
+    (sourceSets.main.output.classesDir)from files
+    (sourceSets.main.output.resourcesDir)from
+    {configurations.runtime.collect 
+          {it.isDirectory() ? it : zipTree(it) 
+                                        }}
+    {// remove all signature files exclude 
+        "META-INF/*.SF"
+        exclude"META-INF/*.DSA" exclude 
+    "META-INF/*.RSA" } manifest
+    {
+attributes 'Main-Class': project.mainClassName    
+    attributes 'Version': project.version
+    }}
+xtend 
+{useDaemon = true
+ xtendAsPrimaryDebugSource = false 
+ hideSyntheticVariables = false
 }
