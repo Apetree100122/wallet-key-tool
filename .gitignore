@@ -1,14 +1,11 @@
-.gradle
-build/
-bin/
-xtend-gen/
-*.swp
-*.classpath
-*.project
-*.settings
-.DS_Store
-
-.README.md.html
-make_exe.sh
-*.exe
-*.jar
+.gradle build
+/
+bin
+/xtend-gen
+/*.swp*.classpath*.project*.settings.DS
+_Store
+.README
+.md
+.html
+ make_
+exe.sh*.exe*.jar
